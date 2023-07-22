@@ -1,0 +1,23 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 9003:9003
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=RuanFelipe
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=dom_pixel
+    volumes:
+      - ./pg_hba.conf:/etc/postgresql/13/main/pg_hba.conf
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
