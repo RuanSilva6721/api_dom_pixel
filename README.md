@@ -14,7 +14,7 @@ Clone o projeto, usando o comando abaixo (usando HTTPS):
 
 ```bash
 
-git clone https://github.com/RuanSilva6721/api-appliance.git
+git clone https://github.com/RuanSilva6721/api_dom_pixel.git
 ```
 
 
@@ -23,7 +23,7 @@ Depois de clonar, acesse o repositório e instale as dependências com os comand
 
 ```bash
 
-cd api-appliance
+cd api_dom_pixel
 composer install
 ```
 
