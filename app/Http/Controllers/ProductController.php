@@ -62,7 +62,6 @@ class ProductController extends Controller
     }
     public function createProduct(Request $request)
     {
-
         try {
             $result = $this->productService->createProduct($request);
             if ($result) {

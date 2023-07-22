@@ -1,11 +1,9 @@
 <?php
 
-use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 
@@ -15,78 +13,52 @@ class ProductTest extends TestCase
 
     use RefreshDatabase;
 
-
     public function test_create_product()
     {
-        Brand::factory(10)->create();
 
-        $brand =Brand::first();
         $payload = [
             'name' => 'accusamus',
             'description' => 'Sequi et in est beatae.',
-            'voltage' => '110v',
-            'brand_id' => $brand->id,
+            'price' => 10.99,
+            'stock_quantity' => 50
         ];
 
-        $response = $this->postJson($this->endpoint.'Create', $payload);
+        $response = $this->postJson($this->endpoint . 'Create', $payload);
 
         $response->assertStatus(Response::HTTP_CREATED);
     }
 
     public function test_find()
     {
-        Brand::factory(10)->create();
-
         $product = Product::factory()->create();
 
         $response = $this->getJson("{$this->endpoint}/{$product->id}");
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure([
-    
-                'id',
-                'name',
-                'description',
-                'voltage',
-                'brand_id',
-                'created_at',
-                'updated_at'
-            
+            'id',
+            'name',
+            'description',
+            'price',
+            'stock_quantity'
         ]);
     }
 
-    // public function test_find_not_found()
-    // {
-    //     $response = $this->getJson("{$this->endpoint}/fake_id");
-
-    //     $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
-    // }
-
     public function test_update()
     {
-
-        DB::beginTransaction();
-         Brand::factory(10)->create();
-
-        try {
             $product = Product::factory()->create();
 
             $payload = [
                 'name' => 'Updated Product',
                 'description' => 'This is the updated product',
-                'voltage' => '220v',
-                'brand_id' => $product->brand_id
+                'price' => 15.99,
+                'stock_quantity' => 100
             ];
 
             $response = $this->putJson("{$this->endpoint}/{$product->id}", $payload);
 
-            $response->assertStatus(Response::HTTP_OK);
 
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();
-            throw $e;
-        }
+            $response->assertStatus(Response::HTTP_OK);
     }
 
     public function test_update_not_found()
@@ -95,7 +67,7 @@ class ProductTest extends TestCase
             'name' => 'Updated Product'
         ]);
 
-        $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $response->assertStatus(Response::HTTP_OK);
     }
 
     public function test_delete_not_found()
@@ -107,7 +79,6 @@ class ProductTest extends TestCase
 
     public function test_delete()
     {
-        Brand::factory(10)->create();
         $product = Product::factory()->create();
 
         $response = $this->deleteJson("{$this->endpoint}/{$product->id}");

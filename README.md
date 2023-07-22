@@ -1,4 +1,4 @@
-# API Appliance
+# API DomPixel
 
 Teste em Laravel.
 
@@ -67,7 +67,7 @@ Caso queira adicionar dados fictícios para o seu usuário no banco:
 
 ```bash
 
-php artisan db:seed --class=BrandSeeder & php artisan db:seed --class=ProductSeeder
+php artisan db:seed --class=ProductSeeder
 ```
 
 
@@ -161,42 +161,26 @@ php artisan test
 
 A API disponibiliza as seguintes rotas:
 
-- `GET /applianceBrand`: Retorna a lista de todas as marcas de eletrodomésticos cadastradas. 
-- `GET /applianceBrand/{id}`: Retorna os detalhes de uma marca de eletrodoméstico específica. 
-- `POST /applianceBrandCreate`: Cria um novo registro de marca de eletrodoméstico. 
-- `PUT /applianceBrand/{id}`: Atualiza uma marca de eletrodoméstico existente. 
-- `DELETE /applianceBrand/{id}`: Remove uma marca de eletrodoméstico existente. 
-- `GET /applianceProduct`: Retorna a lista de todos os produtos de eletrodomésticos cadastrados. 
-- `GET /applianceProduct/{id}`: Retorna os detalhes de um produto de eletrodoméstico específico. 
-- `GET /applianceProductOfBrand/{id}`: Retorna os produtos de eletrodomésticos de uma determinada marca. 
-- `POST /applianceProductCreate`: Cria um novo registro de produto de eletrodoméstico. 
-- `PUT /applianceProduct/{id}`: Atualiza um produto de eletrodoméstico existente. 
-- `DELETE /applianceProduct/{id}`: Remove um produto de eletrodoméstico existente.
+- `GET /applianceProduct`: Retorna a lista de todos os produtos cadastrados. 
+- `GET /applianceProduct/{id}`: Retorna os detalhes de um produto específico. 
+
+- `POST /applianceProductCreate`: Cria um novo registro de produto. 
+- `PUT /applianceProduct/{id}`: Atualiza um produto existente. 
+- `DELETE /applianceProduct/{id}`: Remove um produto existente.
 
 ## Exemplo de Payload de Product
 
 ```json
 {
-    "id": 4,
-    "name": "accusamus",
-    "description": "Sequi et in est beatae.",
-    "voltage": "110v",
-    "brand_id": 2,
-    "created_at": "2023-06-17T01:13:32.000000Z",
-    "updated_at": "2023-06-17T01:13:32.000000Z"
+    "id": 1,
+    "name": "gfgfghdfddfd",
+    "description": "ghghghgfsfddfs",
+    "price": "0.09",
+    "stock_quantity": 3,
+    "created_at": "2023-07-22T16:31:03.000000Z",
+    "updated_at": "2023-07-22T16:41:35.000000Z"
 }
 ```
 
-## Exemplo de Payload de Brand
-
-```json
-{
-    "id": 4,
-    "name": "Philips",
-    "icon": "movie",
-    "created_at": "2023-06-17T01:13:06.000000Z",
-    "updated_at": "2023-06-17T01:13:06.000000Z"
-}
-```
 ## Construído com 
 - [Laravel](https://laravel.com/)
